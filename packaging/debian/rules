@@ -13,10 +13,11 @@ override_dh_auto_build:
 	@echo "RULES.$@"
 	make init && make release
 	ifeq ($(ARCH),amd64)
-		cp dist/everestctl-linux-amd64 bin/everest
-	else
-		cp dist/everestctl-linux-arm64 bin/everest
-	endif
+	@if [ "$(ARCH)" = "amd64" ]; then \
+		cp dist/everestctl-linux-amd64 bin/everest; \
+	else \
+		cp dist/everestctl-linux-arm64 bin/everest; \
+	fi
 	touch $@
 
 override_dh_builddeb:
