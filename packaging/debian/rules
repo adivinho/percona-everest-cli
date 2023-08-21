@@ -12,7 +12,6 @@ override_dh_auto_test override_dh_compress override_dh_fixperms override_dh_stri
 override_dh_auto_build:
 	@echo "RULES.$@"
 	make init && make release
-	ifeq ($(ARCH),amd64)
 	@if [ "$(ARCH)" = "amd64" ]; then \
 		cp dist/everestctl-linux-amd64 bin/everest; \
 	else \
