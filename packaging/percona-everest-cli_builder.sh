@@ -134,7 +134,7 @@ get_sources(){
     cd ../
     mkdir rpm
     cd rpm
-    wget https://raw.githubusercontent.com/percona/percona-everest-cli/packaging/rpm/percona-replication-manager.spec
+    cp ../packaging/rpm/percona-everest-cli.spec .
     cd ${WORKDIR}
     #
     source everest-cli.properties
