@@ -14,6 +14,7 @@ Usage: $0 [OPTIONS]
         --build_src_deb     If it is set - source deb package will be built
         --build_rpm         If it is set - rpm will be built
         --build_deb         If it is set - deb will be built
+        --build_musc        If it is set - darwin and windows will be build
         --install_deps      Install build dependencies(root privilages are required)
         --branch            Branch for build
         --repo              Repo for build
@@ -43,6 +44,7 @@ parse_arguments() {
             --build_src_deb=*) SDEB="$val" ;;
             --build_rpm=*) RPM="$val" ;;
             --build_deb=*) DEB="$val" ;;
+            --build_misc=*) MISC="$val" ;;
             --get_sources=*) SOURCE="$val" ;;
             --branch=*) BRANCH="$val" ;;
             --repo=*) REPO="$val" ;;
@@ -186,7 +188,7 @@ install_deps() {
             switch_to_vault_repo
         fi
         if [ x"$RHEL" = x9 ]; then
-            INSTALL_LIST="go-toolset"
+            INSTALL_LIST="go-toolset cpio"
         else
             yum -y install epel-release
             INSTALL_LIST="golang"
@@ -334,6 +336,46 @@ build_rpm(){
     mkdir -p ${CURDIR}/rpm
     cp rb/RPMS/*/*.rpm ${WORKDIR}/rpm
     cp rb/RPMS/*/*.rpm ${CURDIR}/rpm
+}
+
+build_misc(){
+    if [ $MISC = 0 ]
+    then
+        echo "Misc packages will not be created"
+        return;
+    fi
+    if [ "x$OS" = "xdeb" ]
+    then
+        echo "It is not possible to build rpm here"
+        exit 1
+    fi
+    if [ x"$RHEL" = x8 ]; then
+        switch_to_vault_repo
+    fi
+    cd $WORKDIR
+    get_tar "source_tarball"
+    ls | grep -v tar.gz | xargs rm -rf
+    TARFILE=$(find . -name 'percona-everest-cli*.tar.gz' | sort | tail -n1)
+    SRC_DIR=${TARFILE%.tar.gz}
+    #
+    tar -zxvf ${WORKDIR}/${TARFILE}
+    PEC_FOLDER=$(find / -type d -name "percona-everest-cli-*" | sort | tail -n1)
+    cd $PEC_FOLDER
+#
+    make init
+    make release
+#
+    cd dist
+    tar --owner=0 --group=0 --exclude=.* -czf ${PRODUCT_FULL}-darwin.tar.gz everestctl-darwin* 
+    tar --owner=0 --group=0 --exclude=.* -czf ${PRODUCT_FULL}-windows.tar.gz everestctl.exe 
+    return_code=$?
+    if [ $return_code != 0 ]; then
+        exit $return_code
+    fi
+    mkdir -p ${WORKDIR}/misc
+    mkdir -p ${CURDIR}/misc
+    cp dist/*.tar.gz ${WORKDIR}/misc
+    cp dist/*.tar.gz ${CURDIR}/misc
 }
 
 build_source_deb(){
