@@ -14,7 +14,7 @@ Usage: $0 [OPTIONS]
         --build_src_deb     If it is set - source deb package will be built
         --build_rpm         If it is set - rpm will be built
         --build_deb         If it is set - deb will be built
-        --build_musc        If it is set - darwin and windows will be build
+        --build_misc        If it is set - darwin and windows will be build
         --install_deps      Install build dependencies(root privilages are required)
         --branch            Branch for build
         --repo              Repo for build
@@ -465,6 +465,7 @@ SRPM=0
 SDEB=0
 RPM=0
 DEB=0
+MISC=0
 SOURCE=0
 OS_NAME=
 ARCH=
