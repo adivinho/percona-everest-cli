@@ -372,10 +372,10 @@ build_misc(){
     if [ $return_code != 0 ]; then
         exit $return_code
     fi
-    mkdir -p ${WORKDIR}/misc
-    mkdir -p ${CURDIR}/misc
-    cp *.tar.gz ${WORKDIR}/misc
-    cp *.tar.gz ${CURDIR}/misc
+    mkdir -p ${WORKDIR}/tarball
+    mkdir -p ${CURDIR}/tarball
+    cp *.tar.gz ${WORKDIR}/tarball
+    cp *.tar.gz ${CURDIR}/tarball
 }
 
 build_source_deb(){
