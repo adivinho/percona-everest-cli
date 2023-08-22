@@ -374,8 +374,8 @@ build_misc(){
     fi
     mkdir -p ${WORKDIR}/misc
     mkdir -p ${CURDIR}/misc
-    cp dist/*.tar.gz ${WORKDIR}/misc
-    cp dist/*.tar.gz ${CURDIR}/misc
+    cp *.tar.gz ${WORKDIR}/misc
+    cp *.tar.gz ${CURDIR}/misc
 }
 
 build_source_deb(){
@@ -487,6 +487,7 @@ get_system
 install_deps
 get_sources
 build_srpm
+build_misc
 build_source_deb
 build_rpm
 build_deb
