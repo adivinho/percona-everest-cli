@@ -1,5 +1,3 @@
-%global majorversion 0
-%global minorversion 1
 %global debug_package %{nil}
 %global multiarch     %{nil}
 
@@ -13,7 +11,7 @@
 
 Summary:        CLI client for Percona Everest
 Name:           percona-everest-cli
-Version:        %{majorversion}.%{minorversion}
+Version:        %{version}
 Release:        1%{?dist}
 License:        ASL 2.0
 Group:          Applications/Databases
@@ -54,5 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %license LICENSE
 
 %changelog
-* Tue Aug 15 2023 Vadim Yalovets <vadim.yalovets> 0.1-1
+* Tue Aug 15 2023 Vadim Yalovets <vadim.yalovets> 0.1.0-1
 - Initial build for percona-everest-cli
