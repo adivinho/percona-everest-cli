@@ -25,7 +25,7 @@ override_dh_builddeb:
 override_dh_auto_install:
 	@echo "RULES.$@"
 	mkdir -p $(TMP)usr/bin
-	install -m 0755 bin/everest $(TMP)usr/bin/everestctl
+	install -m 0755 bin/everestctl $(TMP)usr/bin/everestctl
 	mkdir -p $(TMP)usr/share/doc/percona-everest-cli
 	cp -p LICENSE $(TMP)usr/share/doc/percona-everest-cli
 
