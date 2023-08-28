@@ -37,10 +37,10 @@ make release
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 %ifarch x86_64
-cp dist/everestctl-linux-amd64 bin/everest
+cp dist/everestctl-linux-amd64 bin/everestctl
 %endif
 %ifarch aarch64
-cp dist/everestctl-linux-arm64 bin/everest
+cp dist/everestctl-linux-arm64 bin/everestctl
 %endif
 %{__install} -p -D -m 0755 bin/everest %{buildroot}%{_bindir}/everest
 
