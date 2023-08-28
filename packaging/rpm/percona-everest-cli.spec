@@ -42,13 +42,13 @@ cp dist/everestctl-linux-amd64 bin/everestctl
 %ifarch aarch64
 cp dist/everestctl-linux-arm64 bin/everestctl
 %endif
-%{__install} -p -D -m 0755 bin/everest %{buildroot}%{_bindir}/everest
+%{__install} -p -D -m 0755 bin/everestctl %{buildroot}%{_bindir}/everestctl
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%{_bindir}/everest
+%{_bindir}/everestctl
 %license LICENSE
 
 %changelog
